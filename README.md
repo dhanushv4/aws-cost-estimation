@@ -1,100 +1,541 @@
 # AWS Cost Estimation Dashboard
 
-A GUI-based AWS infrastructure cost estimation project built with Python and Tkinter.
+A Python-based desktop GUI application for estimating AWS infrastructure costs before deployment.
 
-This project allows users to define AWS EC2 infrastructure, configure EBS storage and monthly data transfer, and generate an estimated monthly and 12-month infrastructure cost report.
+The application provides a simple dashboard to estimate EC2, EBS, and network transfer costs using locally configured pricing data.
 
-> **Important:** This project is a cost estimation tool. It does not connect to the AWS Billing API and does not represent an actual AWS invoice.
+> **Note:** This project is a local cost estimation tool. It does not create AWS resources, use Terraform, or connect to AWS Billing APIs.
 
----
+## Features
 
-## 📌 Project Overview
+- EC2 cost estimation
+- Multiple EC2 instance types
+- EBS storage cost estimation
+- Network transfer cost estimation
+- Monthly cost calculation
+- Annual cost calculation
+- AWS region selection
+- Cost summary dashboard
+- CSV report generation
+- JSON report generation
+- HTML report generation
+- Configurable pricing using JSON
+- Dark-themed Tkinter GUI
 
-Estimating cloud infrastructure cost before deployment is useful for planning and budgeting.
+## Architecture
 
-This project provides a simple desktop GUI where users can enter their infrastructure configuration:
+```text
+                         ┌───────────────────────┐
+                         │         USER          │
+                         │   Cloud / DevOps      │
+                         └───────────┬───────────┘
+                                     │
+                                     ▼
+                    ┌─────────────────────────────┐
+                    │     Tkinter GUI Dashboard   │
+                    │                             │
+                    │  • AWS Region               │
+                    │  • EC2 Configuration        │
+                    │  • EBS Storage              │
+                    │  • Network Transfer         │
+                    └──────────────┬──────────────┘
+                                   │
+                                   ▼
+                    ┌─────────────────────────────┐
+                    │      Pricing Configuration   │
+                    │                             │
+                    │     config/pricing.json     │
+                    │                             │
+                    │  • Instance Price            │
+                    │  • vCPU                      │
+                    │  • Memory                    │
+                    └──────────────┬──────────────┘
+                                   │
+                                   ▼
+                    ┌─────────────────────────────┐
+                    │       Cost Calculator        │
+                    │                             │
+                    │  • EC2 Cost                 │
+                    │  • EBS Cost                 │
+                    │  • Network Cost             │
+                    │  • Monthly Cost             │
+                    │  • Annual Cost              │
+                    └──────────────┬──────────────┘
+                                   │
+                         ┌─────────┴─────────┐
+                         │                   │
+                         ▼                   ▼
+                ┌─────────────────┐  ┌─────────────────┐
+                │ Cost Dashboard  │  │ Report Generator│
+                │                 │  │                 │
+                │ Monthly Cost    │  │ CSV             │
+                │ Annual Cost     │  │ JSON            │
+                │ EC2 Cost        │  │ HTML            │
+                │ EBS Cost        │  │                 │
+                │ Network Cost    │  │                 │
+                └─────────────────┘  └────────┬────────┘
+                                              │
+                                              ▼
+                                     ┌──────────────────┐
+                                     │     reports/     │
+                                     │ Generated Reports │
+                                     └──────────────────┘
+```
 
-- AWS Region
-- EC2 instance groups
-- EC2 instance type
-- Number of EC2 instances
-- EBS storage per instance
-- Monthly data transfer
-- EBS storage price
+## Cost Calculation
 
-The application then calculates:
+### EC2
+
+```text
+EC2 Monthly Cost
+=
+Number of Instances
+× Hourly Price
+× 730 Hours
+```
+
+### EBS
+
+```text
+EBS Monthly Cost
+=
+Number of Instances
+× EBS GB per Instance
+× EBS Price per GB
+```
+
+### Network
+
+```text
+Network Cost
+=
+Data Transfer GB
+× Transfer Price per GB
+```
+
+### Total
+
+```text
+Monthly Total
+=
+EC2 Cost
++ EBS Cost
++ Network Cost
+```
+
+```text
+Annual Total
+=
+Monthly Total × 12
+```
+
+## Supported EC2 Instances
+
+The default configuration supports:
+
+| Instance | vCPU | Memory |
+|---|---:|---:|
+| t3.micro | 2 | 1 GiB |
+| t3.small | 2 | 2 GiB |
+| t3.medium | 2 | 4 GiB |
+| t3.large | 2 | 8 GiB |
+| r6i.xlarge | 4 | 32 GiB |
+
+Pricing is stored in:
+
+```text
+config/pricing.json
+```
+
+## Project Structure
+
+```text
+aws-cost-estimation/
+│
+├── app.py
+│
+├── config/
+│   └── pricing.json
+│
+├── reports/
+│   ├── *.csv
+│   ├── *.json
+│   └── *.html
+│
+├── architecture/
+│   ├── architecture.md
+│   └── architecture-diagram.png
+│
+├── tests/
+│   └── test_calculator.py
+│
+├── .gitignore
+├── LICENSE
+└── README.md
+```
+
+## Technologies
+
+- Python
+- Tkinter
+- JSON
+- CSV
+- HTML
+- Linux / WSL
+- Git
+- GitHub
+
+## Requirements
+
+- Python 3.10+
+- Tkinter
+- Git
+
+No external Python packages are required for the basic application.
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone git@github.com:dhanushv4/aws-cost-estimation.git
+```
+
+Go to the project:
+
+```bash
+cd aws-cost-estimation
+```
+
+Install Tkinter on Ubuntu/WSL:
+
+```bash
+sudo apt update
+sudo apt install python3-tk
+```
+
+Create required directories:
+
+```bash
+mkdir -p config reports
+```
+
+Validate the pricing file:
+
+```bash
+python3 -m json.tool config/pricing.json
+```
+
+## Run
+
+Start the application:
+
+```bash
+python3 app.py
+```
+
+The **AWS Cost Estimation Dashboard** will open.
+
+## How to Use
+
+### 1. Select Region
+
+Example:
+
+```text
+ap-south-1
+```
+
+### 2. Enter Network Transfer
+
+Example:
+
+```text
+100 GB/month
+```
+
+### 3. Configure EBS
+
+Example:
+
+```text
+20 GB per instance
+```
+
+### 4. Add EC2 Instance
+
+Example:
+
+```text
+Instance Type: t3.medium
+Quantity: 2
+EBS: 20 GB
+```
+
+Click:
+
+```text
+Add Group
+```
+
+### 5. Calculate
+
+Click:
+
+```text
+Calculate
+```
+
+The dashboard displays:
 
 - Monthly EC2 cost
 - Monthly EBS cost
-- Monthly network/data-transfer cost
-- Total monthly estimated cost
-- Annual EC2 cost
-- Annual EBS cost
-- Annual network cost
-- Total 12-month estimated cost
+- Monthly network cost
+- Total monthly cost
+- Annual cost
 
-The application also generates CSV, JSON, and HTML reports.
+### 6. Generate Reports
 
----
-
-## 🎯 Project Objectives
-
-The main objectives of this project are:
-
-1. Build a simple AWS cost estimation system.
-2. Provide a GUI instead of requiring command-line input.
-3. Allow users to define multiple EC2 instance groups.
-4. Calculate estimated infrastructure costs.
-5. Generate a 12-month cost projection.
-6. Generate downloadable/local reports.
-7. Keep pricing configurable without using AWS Billing APIs.
-8. Demonstrate Python, GUI development, cloud concepts, and cost analysis.
-
----
-
-## 🏗️ Architecture
+Click:
 
 ```text
-                    ┌─────────────────────┐
-                    │       User          │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │   Tkinter GUI       │
-                    │                     │
-                    │ Region              │
-                    │ EC2 Groups          │
-                    │ Instance Type       │
-                    │ Instance Quantity    │
-                    │ EBS Storage         │
-                    │ Data Transfer       │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │ Pricing Configuration│
-                    │                     │
-                    │ config/pricing.json │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │ Cost Calculator     │
-                    │                     │
-                    │ EC2 Cost            │
-                    │ EBS Cost            │
-                    │ Network Cost        │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │ 12-Month Projection │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-              ┌─────────────────────────────────┐
-              │          Report Generator       │
-              │                                 │
-              │ CSV │ JSON │ HTML              │
-              └─────────────────────────────────┘
+Calculate & Generate Report
+```
+
+Reports are stored in:
+
+```text
+reports/
+```
+
+## Reports
+
+The application generates:
+
+### CSV
+
+Useful for Excel and data analysis.
+
+### JSON
+
+Useful for automation and future integrations.
+
+### HTML
+
+Useful for browser viewing and project demonstrations.
+
+Example:
+
+```text
+reports/
+├── cost_report_20260930_190500.csv
+├── cost_report_20260930_190500.json
+└── cost_report_20260930_190500.html
+```
+
+## Example
+
+Configuration:
+
+```text
+Region:
+ap-south-1
+
+EC2:
+2 × t3.medium
+
+EBS:
+20 GB per instance
+
+Network:
+100 GB/month
+```
+
+Example calculation:
+
+```text
+EC2:
+2 × $0.0416 × 730
+= $60.736/month
+
+EBS:
+2 × 20 × $0.10
+= $4.00/month
+
+Network:
+100 × $0.09
+= $9.00/month
+
+Estimated Monthly Total:
+$73.736
+
+Estimated Annual Total:
+$884.832
+```
+
+These values are based on the pricing configured in `config/pricing.json`.
+
+## AWS and Terraform
+
+This project does not require:
+
+- AWS account
+- AWS credentials
+- AWS CLI
+- Terraform
+- EC2 deployment
+- AWS Billing API
+
+The application runs completely locally.
+
+The project uses AWS infrastructure concepts for cost estimation and planning.
+
+## Troubleshooting
+
+### Tkinter Error
+
+If you see:
+
+```text
+ModuleNotFoundError: No module named 'tkinter'
+```
+
+Run:
+
+```bash
+sudo apt update
+sudo apt install python3-tk
+```
+
+### Pricing Error
+
+If you see:
+
+```text
+KeyError: 't3.medium'
+```
+
+check:
+
+```text
+config/pricing.json
+```
+
+Make sure `t3.medium` exists.
+
+Example:
+
+```json
+"t3.medium": {
+  "vcpus": 2,
+  "memory_gib": 4,
+  "hourly_price": 0.0416
+}
+```
+
+### Validate JSON
+
+Run:
+
+```bash
+python3 -m json.tool config/pricing.json
+```
+
+## Git Commands
+
+Check changes:
+
+```bash
+git status
+```
+
+Add files:
+
+```bash
+git add .
+```
+
+Commit:
+
+```bash
+git commit -m "Upgrade AWS cost estimation dashboard"
+```
+
+Push:
+
+```bash
+git push origin main
+```
+
+## Future Improvements
+
+- S3 cost estimation
+- RDS cost estimation
+- Lambda cost estimation
+- CloudFront estimation
+- NAT Gateway estimation
+- Monthly cost charts
+- 12-month projection
+- Budget alerts
+- Cost optimization recommendations
+- EC2 instance comparison
+- JSON infrastructure import
+- AWS Pricing API integration
+- Automated tests
+- GitHub Actions CI/CD
+- Docker support
+- Web-based dashboard
+
+## Disclaimer
+
+This application provides estimated costs based on locally configured pricing values.
+
+Actual AWS charges can vary based on:
+
+- AWS region
+- Usage
+- Operating system
+- Storage
+- Data transfer
+- Discounts
+- Free Tier
+- Savings Plans
+- Reserved Instances
+- Taxes
+- Current AWS pricing
+
+Always verify current AWS pricing before deploying production infrastructure.
+
+## Author
+
+**Dhanush V**
+
+MCA Graduate | Cloud & DevOps
+
+GitHub:
+
+```text
+https://github.com/dhanushv4
+```
+
+## Project Goal
+
+The goal of this project is to provide a simple local tool for Cloud and DevOps engineers to estimate infrastructure costs before deployment.
+
+```text
+PLAN
+  ↓
+CONFIGURE
+  ↓
+ESTIMATE
+  ↓
+ANALYZE
+  ↓
+GENERATE REPORT
+  ↓
+OPTIMIZE
+```
+
+---
+
+⭐ **AWS Cost Estimation Dashboard — Python + Tkinter + Cloud/DevOps**

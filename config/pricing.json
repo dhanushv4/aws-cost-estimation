@@ -1,33 +1,27 @@
 {
-  "project": {
-    "name": "AWS Cost Estimation",
-    "currency": "USD",
-    "region": "ap-south-1",
-    "region_name": "Asia Pacific (Mumbai)"
+  "t3.micro": {
+    "vcpus": 2,
+    "memory_gib": 1,
+    "hourly_price": 0.0104
   },
-
-  "instance": {
-    "instance_type": "r6i.xlarge",
+  "t3.small": {
+    "vcpus": 2,
+    "memory_gib": 2,
+    "hourly_price": 0.0208
+  },
+  "t3.medium": {
+    "vcpus": 2,
+    "memory_gib": 4,
+    "hourly_price": 0.0416
+  },
+  "t3.large": {
+    "vcpus": 2,
+    "memory_gib": 8,
+    "hourly_price": 0.0832
+  },
+  "r6i.xlarge": {
     "vcpus": 4,
     "memory_gib": 32,
-    "number_of_instances": 2,
-    "hourly_price": 0.26,
-    "hours_per_day": 24,
-    "days_per_year": 365
-  },
-
-  "storage": {
-    "ebs_gb_per_instance": 50,
-    "ebs_price_per_gb_month": 0.10
-  },
-
-  "network": {
-    "data_transfer_gb_per_month": 100,
-    "data_transfer_price_per_gb": 0.09
-  },
-
-  "additional": {
-    "elastic_ip_monthly": 0,
-    "cloudwatch_monthly": 0
+    "hourly_price": 0.252
   }
 }

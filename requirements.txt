@@ -1,2 +1,9 @@
-# No external dependencies required.
-# Python 3.9+ recommended.
+# AWS Cost Estimation Dashboard
+#
+# Python 3.10+
+#
+# Tkinter is part of the standard Python installation.
+# Ubuntu/WSL:
+#
+# sudo apt update
+# sudo apt install python3-tk
