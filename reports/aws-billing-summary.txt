@@ -1,0 +1,37 @@
+AWS COST ESTIMATION REPORT
+==========================
+
+Project
+-------
+AWS Cost Estimation
+
+Region
+------
+Asia Pacific (Mumbai)
+Region Code: ap-south-1
+
+EC2 Configuration
+-----------------
+Instance Type       : r6i.xlarge
+vCPU                : 4
+Memory              : 32 GiB
+Number of Instances : 2
+Hourly Price        : $0.26
+
+Annual Cost
+-----------
+EC2 Cost            : $4555.20
+EBS Cost            : $120.00
+Network Cost        : $108.00
+Additional Cost     : $0.00
+--------------------------------
+TOTAL ANNUAL COST   : $4783.20
+
+Monthly Average
+---------------
+$398.60
+
+NOTE
+----
+This is an estimated cost generated using a local pricing model.
+It is NOT an actual AWS billing statement.

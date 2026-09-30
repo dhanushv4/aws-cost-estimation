@@ -1,0 +1,117 @@
+{
+    "generated_at": "2026-09-30T10:55:24.172279",
+    "region": "ap-south-1",
+    "pricing_model": "Local configurable pricing model",
+    "groups": [
+        {
+            "name": "Web Server",
+            "instance_type": "instance",
+            "instances": 2,
+            "ebs_gb": 50.0,
+            "vcpus": 4,
+            "memory_gib": 32,
+            "hourly_price": 0.26
+        },
+        {
+            "name": "application",
+            "instance_type": "instance",
+            "instances": 2,
+            "ebs_gb": 30.0,
+            "vcpus": 4,
+            "memory_gib": 32,
+            "hourly_price": 0.26
+        }
+    ],
+    "monthly": [
+        {
+            "month": "2026-01",
+            "ec2": 759.2,
+            "ebs": 16.0,
+            "network": 9.0,
+            "total": 784.2
+        },
+        {
+            "month": "2026-02",
+            "ec2": 759.2,
+            "ebs": 16.0,
+            "network": 9.0,
+            "total": 784.2
+        },
+        {
+            "month": "2026-03",
+            "ec2": 759.2,
+            "ebs": 16.0,
+            "network": 9.0,
+            "total": 784.2
+        },
+        {
+            "month": "2026-04",
+            "ec2": 759.2,
+            "ebs": 16.0,
+            "network": 9.0,
+            "total": 784.2
+        },
+        {
+            "month": "2026-05",
+            "ec2": 759.2,
+            "ebs": 16.0,
+            "network": 9.0,
+            "total": 784.2
+        },
+        {
+            "month": "2026-06",
+            "ec2": 759.2,
+            "ebs": 16.0,
+            "network": 9.0,
+            "total": 784.2
+        },
+        {
+            "month": "2026-07",
+            "ec2": 759.2,
+            "ebs": 16.0,
+            "network": 9.0,
+            "total": 784.2
+        },
+        {
+            "month": "2026-08",
+            "ec2": 759.2,
+            "ebs": 16.0,
+            "network": 9.0,
+            "total": 784.2
+        },
+        {
+            "month": "2026-09",
+            "ec2": 759.2,
+            "ebs": 16.0,
+            "network": 9.0,
+            "total": 784.2
+        },
+        {
+            "month": "2026-10",
+            "ec2": 759.2,
+            "ebs": 16.0,
+            "network": 9.0,
+            "total": 784.2
+        },
+        {
+            "month": "2026-11",
+            "ec2": 759.2,
+            "ebs": 16.0,
+            "network": 9.0,
+            "total": 784.2
+        },
+        {
+            "month": "2026-12",
+            "ec2": 759.2,
+            "ebs": 16.0,
+            "network": 9.0,
+            "total": 784.2
+        }
+    ],
+    "annual": {
+        "ec2": 9110.4,
+        "ebs": 192.0,
+        "network": 108.0,
+        "total": 9410.4
+    }
+}

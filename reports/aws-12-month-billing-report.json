@@ -1,0 +1,144 @@
+{
+    "generated_at": "2026-09-30T10:44:09.119598",
+    "project": {
+        "name": "AWS Cost Estimation",
+        "currency": "USD",
+        "region": "ap-south-1",
+        "region_name": "Asia Pacific (Mumbai)"
+    },
+    "instance": {
+        "instance_type": "r6i.xlarge",
+        "vcpus": 4,
+        "memory_gib": 32,
+        "number_of_instances": 2,
+        "hourly_price": 0.26,
+        "hours_per_day": 24,
+        "days_per_year": 365
+    },
+    "storage": {
+        "ebs_gb_per_instance": 50,
+        "ebs_price_per_gb_month": 0.1
+    },
+    "network": {
+        "data_transfer_gb_per_month": 100,
+        "data_transfer_price_per_gb": 0.09
+    },
+    "monthly_reports": [
+        {
+            "month": "2026-01",
+            "hours": 730,
+            "ec2": 379.6,
+            "ebs": 10.0,
+            "network": 9.0,
+            "additional": 0,
+            "total": 398.6
+        },
+        {
+            "month": "2026-02",
+            "hours": 730,
+            "ec2": 379.6,
+            "ebs": 10.0,
+            "network": 9.0,
+            "additional": 0,
+            "total": 398.6
+        },
+        {
+            "month": "2026-03",
+            "hours": 730,
+            "ec2": 379.6,
+            "ebs": 10.0,
+            "network": 9.0,
+            "additional": 0,
+            "total": 398.6
+        },
+        {
+            "month": "2026-04",
+            "hours": 730,
+            "ec2": 379.6,
+            "ebs": 10.0,
+            "network": 9.0,
+            "additional": 0,
+            "total": 398.6
+        },
+        {
+            "month": "2026-05",
+            "hours": 730,
+            "ec2": 379.6,
+            "ebs": 10.0,
+            "network": 9.0,
+            "additional": 0,
+            "total": 398.6
+        },
+        {
+            "month": "2026-06",
+            "hours": 730,
+            "ec2": 379.6,
+            "ebs": 10.0,
+            "network": 9.0,
+            "additional": 0,
+            "total": 398.6
+        },
+        {
+            "month": "2026-07",
+            "hours": 730,
+            "ec2": 379.6,
+            "ebs": 10.0,
+            "network": 9.0,
+            "additional": 0,
+            "total": 398.6
+        },
+        {
+            "month": "2026-08",
+            "hours": 730,
+            "ec2": 379.6,
+            "ebs": 10.0,
+            "network": 9.0,
+            "additional": 0,
+            "total": 398.6
+        },
+        {
+            "month": "2026-09",
+            "hours": 730,
+            "ec2": 379.6,
+            "ebs": 10.0,
+            "network": 9.0,
+            "additional": 0,
+            "total": 398.6
+        },
+        {
+            "month": "2026-10",
+            "hours": 730,
+            "ec2": 379.6,
+            "ebs": 10.0,
+            "network": 9.0,
+            "additional": 0,
+            "total": 398.6
+        },
+        {
+            "month": "2026-11",
+            "hours": 730,
+            "ec2": 379.6,
+            "ebs": 10.0,
+            "network": 9.0,
+            "additional": 0,
+            "total": 398.6
+        },
+        {
+            "month": "2026-12",
+            "hours": 730,
+            "ec2": 379.6,
+            "ebs": 10.0,
+            "network": 9.0,
+            "additional": 0,
+            "total": 398.6
+        }
+    ],
+    "annual_summary": {
+        "ec2": 4555.2,
+        "ebs": 120.0,
+        "network": 108.0,
+        "additional": 0,
+        "total": 4783.2,
+        "monthly_average": 398.6
+    }
+}
